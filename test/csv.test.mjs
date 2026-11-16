@@ -11,6 +11,14 @@ test('local inventory accepts Excel-style semicolons, UTF-8 BOM and quoted text'
   assert.deepEqual(result.items, [{ id: 'meissel', name: 'Holz; 12 mm', category: 'Handwerkzeug', bin: 'A-01', count: 2, tags: 'gross "neu"' }]);
 });
 
+test('comma-delimited inventory preserves semicolons in tags with CR line endings', () => {
+  const csv = `${header}\rfile,File,Hand tools,A-01,1,metal;small\r`;
+  const result = validateInventoryCSV(csv, bins);
+  assert.deepEqual(result.errors, []);
+  assert.equal(result.items?.length, 1);
+  assert.equal(result.items[0].tags, 'metal;small');
+});
+
 test('bad input refuses the entire import', () => {
   const cases = [
     ['Unclosed quote', `${header}\nx,"Holz,Test,A-01,1,z`],

@@ -8,7 +8,7 @@ Allow repair cafés to maintain inventory in a spreadsheet and import it via CSV
 - Required columns: `id`, `name`, `category`, `bin`, `count`, `tags`
 - Support comma and semicolon delimiters
 - Handle quoted fields with embedded delimiters and doubled quotes
-- Accept CRLF and LF line endings
+- Accept CRLF, LF and CR line endings. Detect the delimiter from the header alone.
 - Strip UTF-8 BOM if present
 
 ## Validation

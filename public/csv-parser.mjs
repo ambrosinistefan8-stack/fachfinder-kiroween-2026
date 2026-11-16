@@ -5,7 +5,7 @@ const MAX_ENTRIES = 200;
 // Kiro proposed the row/field parser. Review added strict quote validation.
 export function parseCSV(input) {
   const text = input.replace(/^\uFEFF/, '');
-  const delimiter = (text.split(/\r?\n/, 1)[0] ?? '').includes(';') ? ';' : ',';
+  const delimiter = (text.split(/\r\n|\r|\n/, 1)[0] ?? '').includes(';') ? ';' : ',';
   const rows = [];
   let row = [];
   let field = '';
