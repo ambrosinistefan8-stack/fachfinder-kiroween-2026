@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f7f2e9">
+  <title>Fachfinder · Werkstatt-Suche</title>
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./vendor/jsQR.js"></script>
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <header class="masthead"><div class="mast-inner"><a class="brand" href="./" aria-label="Fachfinder, Startseite"><span class="brand-icon" aria-hidden="true"></span>Fachfinder</a><span class="mast-note">Digitale Werkstatt</span></div></header>
+  <main>
+    <section class="intro"><p class="eyebrow">Werkstatt-Suche</p><h1>Finde das richtige Fach.</h1><p>Werkzeug auswählen und das Regal fotografieren. Fachfinder erkennt die QR-Markierung und zeigt, ob du vor dem richtigen Fach stehst.</p></section>
+    <div class="workspace">
+      <section class="photo-panel" aria-labelledby="photo-title">
+        <div class="panel-header"><div><p class="eyebrow">Schritt 2</p><h2 id="photo-title">Regalfoto prüfen</h2></div><label class="upload">Foto auswählen<input id="photo" type="file" accept="image/*"></label></div>
+        <div class="photo-view" id="photo-view">
+          <div class="visual"><img id="image" alt="Werkstattregal mit QR-markierten Fächern" src="./assets/workshop-demo.png" width="1536" height="1024"><div id="marks" aria-hidden="true"></div></div>
+          <div class="photo-caption"><span id="photo-name">Beispielregal</span><span id="mark-count">Bereit</span></div>
+        </div>
+        <div class="photo-actions"><button id="demo" type="button" class="subtle">Beispielregal</button><button id="single-demo" type="button" class="subtle">Einzelfach testen</button><a href="./labels.html" class="label-link">QR-Etiketten drucken ↗</a></div>
+        <p class="privacy"><span aria-hidden="true">●</span> Die Bildanalyse läuft lokal im Browser.</p>
+      </section>
+      <div class="right-col">
+        <section class="inventory" aria-labelledby="search-title">
+          <p class="eyebrow">Schritt 1</p><h2 id="search-title">Werkzeug wählen</h2>
+          <label for="query" class="sr-only">Inventar durchsuchen</label><div class="search-wrap"><span aria-hidden="true">⌕</span><input type="search" id="query" placeholder="Inventar durchsuchen" autocomplete="off"></div>
+          <div class="tool-list" id="tools" aria-label="Inventar"></div>
+        </section>
+        <section id="match" class="match idle" aria-live="polite" aria-labelledby="match-title">
+          <p class="eyebrow">Abgleich</p><h2 id="match-title">Werkzeug wählen</h2><p id="match-copy">Das passende Fach erscheint, sobald du ein Werkzeug auswählst.</p>
+          <button id="confirm" class="primary" type="button" hidden>Fach bestätigen <span aria-hidden="true">↗</span></button>
+        </section>
+      </div>
+    </div>
+    <details class="inventory import-inventory">
+      <summary>Eigenes Inventar importieren</summary>
+      <p>Verwende die CSV-Vorlage und die Fächer A-01 bis B-03. Der Import ersetzt deine aktuelle Liste erst nach der Bestätigung.</p>
+      <div class="photo-actions"><label class="upload">CSV-Datei auswählen<input id="inventory-file" type="file" accept=".csv,text/csv"></label><a href="./fixtures/inventory-sample.csv" download>CSV-Vorlage herunterladen</a></div>
+      <p id="import-status" role="status">Das Beispielinventar ist aktiv.</p>
+      <ul id="import-error" role="alert" hidden></ul>
+      <div id="import-preview" hidden>
+        <p id="preview-summary"></p>
+        <ul id="preview-items"></ul>
+        <div class="photo-actions"><button id="apply-import" class="primary" type="button">Inventar ersetzen</button><button id="cancel-import" class="subtle" type="button">Abbrechen</button></div>
+      </div>
+      <button id="reset-inventory" class="subtle" type="button" hidden>Beispielinventar wiederherstellen</button>
+    </details>
+    <section class="history" aria-labelledby="history-title"><h2 id="history-title">Letzte Bestätigungen</h2><p id="empty-history">Deine Bestätigungen erscheinen hier.</p><ul id="history"></ul><button id="reset" class="subtle" type="button" hidden>Liste zurücksetzen</button></section>
+  </main>
+</body>
+</html>
